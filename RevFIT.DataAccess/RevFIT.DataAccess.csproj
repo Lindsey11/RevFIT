@@ -15,4 +15,8 @@
     <ProjectReference Include="..\RevFIT.Context\RevFIT.Context.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="WorkoutTypeRepo\" />
+  </ItemGroup>
+
 </Project>
