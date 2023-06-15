@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RevFIT.Context\RevFIT.Context.csproj" />
+    <ProjectReference Include="..\RevFIT.DataAccess\RevFIT.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

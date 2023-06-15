@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using RevFIT.Context.Context;
 using RevFIT.DataAccess.UserRepo;
 using RevFIT.DataAccess.WorkoutRegularRepo;
-using RevFIT.DataAccess.Workouts;
+using RevFIT.DataAccess.WorkoutRepo;
 
 var builder = WebApplication.CreateBuilder(args);
 
