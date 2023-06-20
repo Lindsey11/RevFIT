@@ -64,7 +64,7 @@ namespace RevFIT.DataAccess.WorkoutRepo
         public async Task<Workout> GetWorkoutByProgramAndDateAsync(int programID, DateTime date)
         {
             var todays = await _dbContext.Workouts
-                                        .Where(x => x.ProgramId == programID && x.WokoutDate == date)
+                                        .Where(x => x.ProgramId == programID && x.WokoutDate == date.Date)
                                         .Include(w => w.Program)
                                         .Include(w => w.WorkoutCircuitParents)
                                         .Include(w => w.WorkoutRegulars).FirstOrDefaultAsync();

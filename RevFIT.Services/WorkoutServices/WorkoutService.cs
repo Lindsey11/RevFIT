@@ -12,6 +12,7 @@ namespace RevFIT.Services.WorkoutServices
     public class WorkoutService : IWorkoutService
     {
         private readonly IWorkoutRepository _workoutRepository;
+      
         public WorkoutService(IWorkoutRepository workoutRepository)
         {
             _workoutRepository = workoutRepository;

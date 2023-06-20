@@ -16,10 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RevFIT.Context\RevFIT.Context.csproj" />
     <ProjectReference Include="..\RevFIT.DataAccess\RevFIT.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\RevFIT.Services\RevFIT.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RevFIT.Services.WorkoutServices
 {
-    internal interface IWorkoutService
+    public interface IWorkoutService
     {
         Task<ServiceResponseModel<Workout>> GetTodaysWorkout(int programID, DateTime workoutDate);
     }
