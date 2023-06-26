@@ -7,6 +7,8 @@ public partial class WorkoutRegularChild
 {
     public int WorkoutRegularChildrenId { get; set; }
 
+    public string ExcerciseName { get; set; } = null!;
+
     public int? Reps { get; set; }
 
     public int? Sets { get; set; }
@@ -19,9 +21,9 @@ public partial class WorkoutRegularChild
 
     public string? Notes { get; set; }
 
-    public DateTime DateCreated { get; set; }
-
     public int WorkoutRegularParentId { get; set; }
+
+    public DateTime DateCreated { get; set; }
 
     public virtual WorkoutRegular WorkoutRegularParent { get; set; } = null!;
 }

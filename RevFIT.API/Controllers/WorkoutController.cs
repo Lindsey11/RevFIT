@@ -22,5 +22,12 @@ namespace RevFIT.API.Controllers
         {
             return Ok(await _workoutService.GetTodaysWorkout(progrogramID, DateTime.Now));
         }
+
+        [HttpPost("add-workout")]
+        [ProducesResponseType(typeof(ServiceResponseModel<int>),200)]
+        public async Task<IActionResult> AddMainWorkout([FromBody] WorkoutAddRequestModel workoutAddRequestModel)
+        {
+            return Ok(await _workoutService.AddMainWorkout(workoutAddRequestModel));
+        }
     }
 }

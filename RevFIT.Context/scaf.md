@@ -1,2 +1,2 @@
 
-Scaffold-DbContext "Server=localhost;Database=Bearfitness;Integrated Security=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -Force -NoOnConfiguring -Schema dbo -Context DataContext -ContextDir Context -OutputDir Models
+Scaffold-DbContext "Server=pl-sql1.hkdns.co.za;Database=hlrvvniw_revfit_staging;User Id=hlrvvniw_revfit_bear;Password=oQ3k0w6!9;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -Force -NoOnConfiguring -Schema dbo -Context DataContext -ContextDir Context -OutputDir Models

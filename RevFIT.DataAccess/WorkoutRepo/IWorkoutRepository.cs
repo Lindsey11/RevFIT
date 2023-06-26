@@ -11,7 +11,7 @@ namespace RevFIT.DataAccess.WorkoutRepo
     {
         Task<IEnumerable<Workout>> GetAllWorkoutsAsync();
         Task<Workout> GetWorkoutByIdAsync(int id);
-        Task<bool> AddWorkoutAsync(Workout workout);
+        Task<int> AddWorkoutAsync(Workout workout);
         Task<bool> UpdateWorkoutAsync(Workout workout);
         Task<bool> DeleteWorkoutAsync(int id);
         Task<Workout> GetWorkoutByProgramAndDateAsync(int programID, DateTime date);

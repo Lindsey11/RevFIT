@@ -17,7 +17,5 @@ public partial class WorkoutCircuitParent
 
     public DateTime WokoutDate { get; set; }
 
-    public virtual Workout Workout { get; set; } = null!;
-
     public virtual ICollection<WorkoutCircuitChild> WorkoutCircuitChildren { get; set; } = new List<WorkoutCircuitChild>();
 }

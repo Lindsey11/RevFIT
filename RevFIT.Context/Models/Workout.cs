@@ -20,10 +20,4 @@ public partial class Workout
     public string? CoolDown { get; set; }
 
     public DateTime WokoutDate { get; set; }
-
-    public virtual ExcerciseProgram Program { get; set; } = null!;
-
-    public virtual ICollection<WorkoutCircuitParent> WorkoutCircuitParents { get; set; } = new List<WorkoutCircuitParent>();
-
-    public virtual ICollection<WorkoutRegular> WorkoutRegulars { get; set; } = new List<WorkoutRegular>();
 }

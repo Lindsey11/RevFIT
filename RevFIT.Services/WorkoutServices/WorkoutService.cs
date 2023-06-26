@@ -35,5 +35,38 @@ namespace RevFIT.Services.WorkoutServices
                 return new() { Data = null, IsSuccess = false, Message = $"Error getting today's workout. {error.Message}" };
             }
         }
+
+        public async Task<ServiceResponseModel<int>> AddMainWorkout(WorkoutAddRequestModel model)
+        {
+            try
+            {
+                var workoutToadd = new Workout()
+                {
+                    CoolDown = model.CoolDown,
+                    WarmUp = model.WarmUp,
+                    WokoutDate = model.WokoutDate,
+                    WorkoutName = model.WorkoutName,
+                    Description = model.Description,
+                    ProgramId = model.ProgramId
+                };
+
+                var addResult = await _workoutRepository.AddWorkoutAsync(workoutToadd);
+
+                if(addResult == 0)
+                    return new() { IsSuccess = false, Message = $"Workout could not be added" };
+
+                return new() { Data = addResult, IsSuccess = true, Message = "Workout added" };
+            }
+            catch (Exception error)
+            {
+
+                return new() { IsSuccess = false, Message = $"Error adding workout. {error.Message}" };
+            }
+        }
+
+        //public async Task<ServiceResponseModel<bool>> AddRegularWorkout()
+        //{
+
+        //}
     }
 }

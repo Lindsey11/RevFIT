@@ -42,10 +42,12 @@ public partial class DataContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.UseCollation("Latin1_General_CI_AS");
+        modelBuilder.HasDefaultSchema("hlrvvniw_revfit_bear");
 
         modelBuilder.Entity<Excercise>(entity =>
         {
+            entity.ToTable("Excercises", "dbo");
+
             entity.Property(e => e.ExcerciseId).HasColumnName("ExcerciseID");
             entity.Property(e => e.Difficulty).IsUnicode(false);
             entity.Property(e => e.Equipment).IsUnicode(false);
@@ -58,7 +60,7 @@ public partial class DataContext : DbContext
 
         modelBuilder.Entity<ExcerciseDifficulty>(entity =>
         {
-            entity.ToTable("ExcerciseDifficulty");
+            entity.ToTable("ExcerciseDifficulty", "dbo");
 
             entity.Property(e => e.ExcerciseDifficultyId).HasColumnName("ExcerciseDifficultyID");
             entity.Property(e => e.Name).IsUnicode(false);
@@ -69,7 +71,7 @@ public partial class DataContext : DbContext
         {
             entity.HasKey(e => e.ProgramId);
 
-            entity.ToTable("ExcerciseProgram");
+            entity.ToTable("ExcerciseProgram", "dbo");
 
             entity.Property(e => e.ProgramId).HasColumnName("ProgramID");
             entity.Property(e => e.DateCreated)
@@ -90,7 +92,7 @@ public partial class DataContext : DbContext
         {
             entity.HasKey(e => e.ExcerciseTypId);
 
-            entity.ToTable("ExcerciseType");
+            entity.ToTable("ExcerciseType", "dbo");
 
             entity.Property(e => e.ExcerciseTypId).HasColumnName("ExcerciseTypID");
             entity.Property(e => e.Name).IsUnicode(false);
@@ -101,7 +103,7 @@ public partial class DataContext : DbContext
         {
             entity.HasKey(e => e.MuscleGroupId);
 
-            entity.ToTable("ExcersiceMuscleGroup");
+            entity.ToTable("ExcersiceMuscleGroup", "dbo");
 
             entity.Property(e => e.MuscleGroupId).HasColumnName("MuscleGroupID");
             entity.Property(e => e.Name).IsUnicode(false);
@@ -110,7 +112,7 @@ public partial class DataContext : DbContext
 
         modelBuilder.Entity<ProgramType>(entity =>
         {
-            entity.ToTable("ProgramType");
+            entity.ToTable("ProgramType", "dbo");
 
             entity.Property(e => e.ProgramTypeId).HasColumnName("ProgramTypeID");
             entity.Property(e => e.Name).IsUnicode(false);
@@ -119,6 +121,8 @@ public partial class DataContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
+            entity.ToTable("Users", "dbo");
+
             entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.DateCreated).HasColumnType("datetime");
             entity.Property(e => e.Email).IsUnicode(false);
@@ -126,6 +130,8 @@ public partial class DataContext : DbContext
 
         modelBuilder.Entity<Workout>(entity =>
         {
+            entity.ToTable("Workouts", "dbo");
+
             entity.Property(e => e.WorkoutId).HasColumnName("WorkoutID");
             entity.Property(e => e.CoolDown).IsUnicode(false);
             entity.Property(e => e.Description).IsUnicode(false);
@@ -138,18 +144,13 @@ public partial class DataContext : DbContext
                 .HasColumnType("datetime");
             entity.Property(e => e.WorkoutName).IsUnicode(false);
             entity.Property(e => e.WorkoutTypeId).HasColumnName("WorkoutTypeID");
-
-            entity.HasOne(d => d.Program).WithMany(p => p.Workouts)
-                .HasForeignKey(d => d.ProgramId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Workouts_ExcerciseProgram");
         });
 
         modelBuilder.Entity<WorkoutCircuitChild>(entity =>
         {
             entity.HasKey(e => e.WorkoutCircuitChild1);
 
-            entity.ToTable("WorkoutCircuitChild");
+            entity.ToTable("WorkoutCircuitChild", "dbo");
 
             entity.Property(e => e.WorkoutCircuitChild1).HasColumnName("WorkoutCircuitChild");
             entity.Property(e => e.Excercise).IsUnicode(false);
@@ -167,48 +168,48 @@ public partial class DataContext : DbContext
         {
             entity.HasKey(e => e.WorkoutCircutParent).HasName("PK_WorkoutCircutParent");
 
-            entity.ToTable("WorkoutCircuitParent");
+            entity.ToTable("WorkoutCircuitParent", "dbo");
 
             entity.Property(e => e.Time).IsUnicode(false);
             entity.Property(e => e.WokoutDate).HasColumnType("datetime");
             entity.Property(e => e.WorkoutId).HasColumnName("WorkoutID");
-
-            entity.HasOne(d => d.Workout).WithMany(p => p.WorkoutCircuitParents)
-                .HasForeignKey(d => d.WorkoutId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_WorkoutCircuitParent_Workouts");
         });
 
         modelBuilder.Entity<WorkoutRegular>(entity =>
         {
-            entity.ToTable("WorkoutRegular");
+            entity.ToTable("WorkoutRegular", "dbo");
 
             entity.Property(e => e.WorkoutRegularId).HasColumnName("WorkoutRegularID");
+            entity.Property(e => e.CoolDown).IsUnicode(false);
             entity.Property(e => e.DateCreated)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Description).IsUnicode(false);
-            entity.Property(e => e.ExcerciseName).IsUnicode(false);
+            entity.Property(e => e.ExcerciseProgramId).HasColumnName("ExcerciseProgramID");
             entity.Property(e => e.MuscleGroupFocus).IsUnicode(false);
             entity.Property(e => e.Notes).IsUnicode(false);
-            entity.Property(e => e.WorkoutId).HasColumnName("WorkoutID");
+            entity.Property(e => e.WarmUp).IsUnicode(false);
+            entity.Property(e => e.WorkoutDate).HasColumnType("datetime");
+            entity.Property(e => e.WorkoutName).IsUnicode(false);
 
-            entity.HasOne(d => d.Workout).WithMany(p => p.WorkoutRegulars)
-                .HasForeignKey(d => d.WorkoutId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_WorkoutRegular_Workouts");
+            entity.HasOne(d => d.ExcerciseProgram).WithMany(p => p.WorkoutRegulars)
+                .HasForeignKey(d => d.ExcerciseProgramId)
+                .HasConstraintName("FK_WorkoutRegular_ExcerciseProgram");
         });
 
         modelBuilder.Entity<WorkoutRegularChild>(entity =>
         {
             entity.HasKey(e => e.WorkoutRegularChildrenId);
 
-            entity.ToTable("WorkoutRegularChild");
+            entity.ToTable("WorkoutRegularChild", "dbo");
 
             entity.Property(e => e.WorkoutRegularChildrenId).HasColumnName("WorkoutRegularChildrenID");
             entity.Property(e => e.DateCreated)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.ExcerciseName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.Notes).IsUnicode(false);
             entity.Property(e => e.WorkoutRegularParentId).HasColumnName("WorkoutRegularParentID");
 
@@ -222,7 +223,7 @@ public partial class DataContext : DbContext
         {
             entity.HasKey(e => e.ScoringTypeId);
 
-            entity.ToTable("WorkoutScoringType");
+            entity.ToTable("WorkoutScoringType", "dbo");
 
             entity.Property(e => e.ScoringTypeId)
                 .ValueGeneratedNever()
@@ -233,7 +234,7 @@ public partial class DataContext : DbContext
 
         modelBuilder.Entity<WorkoutType>(entity =>
         {
-            entity.ToTable("WorkoutType");
+            entity.ToTable("WorkoutType", "dbo");
 
             entity.Property(e => e.WorkoutTypeId).HasColumnName("WorkoutTypeID");
             entity.Property(e => e.Description).IsUnicode(false);

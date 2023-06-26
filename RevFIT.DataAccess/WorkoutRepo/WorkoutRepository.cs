@@ -35,11 +35,13 @@ namespace RevFIT.DataAccess.WorkoutRepo
                 .FirstOrDefaultAsync(w => w.WorkoutId == id);
         }
 
-        public async Task<bool> AddWorkoutAsync(Workout workout)
+        public async Task<int> AddWorkoutAsync(Workout workout)
         {
             _dbContext.Add(workout);
-            int affectedRows = await _dbContext.SaveChangesAsync();
-            return affectedRows > 0;
+            var res = await _dbContext.SaveChangesAsync();
+
+            return workout.WorkoutId;
+            //return affectedRows > 0;
         }
 
         public async Task<bool> UpdateWorkoutAsync(Workout workout)
