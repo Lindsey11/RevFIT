@@ -17,7 +17,7 @@ namespace RevFIT.API.Controllers
         }
 
         [HttpGet("todays-workout")]
-        [ProducesResponseType(typeof(ServiceResponseModel<Workout>),200)]
+        [ProducesResponseType(typeof(ServiceResponseModel<Wod>), 200)]
         public async Task<IActionResult> GetTodaysWorkouts(int progrogramID, DateTime dateTime)
         {
             return Ok(await _workoutService.GetTodaysWorkout(progrogramID, DateTime.Now));

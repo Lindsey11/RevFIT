@@ -11,14 +11,14 @@ namespace RevFIT.Services.WorkoutServices
 {
     public class WorkoutService : IWorkoutService
     {
-        private readonly IWorkoutRepository _workoutRepository;
+        private readonly IWODRepository _workoutRepository;
       
-        public WorkoutService(IWorkoutRepository workoutRepository)
+        public WorkoutService(IWODRepository workoutRepository)
         {
             _workoutRepository = workoutRepository;
         }
 
-        public async Task<ServiceResponseModel<Workout>> GetTodaysWorkout(int programID, DateTime workoutDate)
+        public async Task<ServiceResponseModel<Wod>> GetTodaysWorkout(int programID, DateTime workoutDate)
         {
             try
             {
@@ -40,20 +40,37 @@ namespace RevFIT.Services.WorkoutServices
         {
             try
             {
-                var workoutToadd = new Workout()
+                var workoutToAdd = new Wod()
                 {
-                    CoolDown = model.CoolDown,
-                    WarmUp = model.WarmUp,
-                    WokoutDate = model.WokoutDate,
                     WorkoutName = model.WorkoutName,
-                    Description = model.Description,
-                    ProgramId = model.ProgramId
+                    WorkoutDefinition = model.WorkoutDefinition,
+                    ScheduleDate = model.ScheduleDate,
+                    ProgramId = model.ProgramId,
+                    DateCreated = DateTime.Now,
+                    IsLive = model.IsLive,
+                    ScoreType = model.ScoreType
                 };
 
-                var addResult = await _workoutRepository.AddWorkoutAsync(workoutToadd);
+                var addResult = await _workoutRepository.AddWorkoutAsync(workoutToAdd);
 
                 if(addResult == 0)
                     return new() { IsSuccess = false, Message = $"Workout could not be added" };
+
+
+                var newsScore = new WorkoutScore()
+                {
+                    WorkoutId = addResult,
+                    MeasureTypeId = model.MeasureTypeID,
+                    ScoreCalculationTypeId = model.CalcTypeID,
+                    ScoreOrderId = model.OrderTypeID,
+                    Sets = model.set
+                };
+
+                var addScoreResult = await _workoutRepository.AddWorkoutScroreingType(newsScore);
+
+                if(addResult == 0)
+                    return new() { IsSuccess = false, Message = $"Score could not be added" };
+
 
                 return new() { Data = addResult, IsSuccess = true, Message = "Workout added" };
             }

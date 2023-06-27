@@ -21,5 +21,5 @@ public partial class ExcerciseProgram
 
     public virtual ProgramType ProgramType { get; set; } = null!;
 
-    public virtual ICollection<WorkoutRegular> WorkoutRegulars { get; set; } = new List<WorkoutRegular>();
+    public virtual ICollection<Wod> Wods { get; set; } = new List<Wod>();
 }

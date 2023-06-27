@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RevFIT.Context.Context;
 using RevFIT.DataAccess.UserRepo;
-using RevFIT.DataAccess.WorkoutRegularRepo;
 using RevFIT.DataAccess.WorkoutRepo;
 using RevFIT.Services.WorkoutServices;
 using System.Text.Json.Serialization;
@@ -23,9 +22,7 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
 
-builder.Services.AddScoped<IWorkoutRepository, WorkoutRepository>();
-builder.Services.AddScoped<IWorkoutRegularChildRepository, WorkoutRegularChildRepository>();
-builder.Services.AddScoped<IWorkoutRegularRepository, WorkoutRegularRepository>();
+builder.Services.AddScoped<IWODRepository, WODRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IWorkoutService, WorkoutService>();
 

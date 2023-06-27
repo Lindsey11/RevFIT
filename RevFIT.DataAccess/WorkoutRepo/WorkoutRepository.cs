@@ -9,70 +9,70 @@ using System.Threading.Tasks;
 
 namespace RevFIT.DataAccess.WorkoutRepo
 {
-    public class WorkoutRepository : IWorkoutRepository
+    public class WODRepository : IWODRepository
     {
         private readonly DataContext _dbContext;
 
-        public WorkoutRepository(DataContext dbContext)
+        public WODRepository(DataContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Workout>> GetAllWorkoutsAsync()
+        public async Task<IEnumerable<Wod>> GetAllWorkoutsAsync()
         {
-            return await _dbContext.Workouts.Include(w => w.Program)
-                .Include(w => w.WorkoutCircuitParents)
-                .Include(w => w.WorkoutRegulars)
+            return await _dbContext.Wods
                 .ToListAsync();
         }
 
-        public async Task<Workout> GetWorkoutByIdAsync(int id)
+        public async Task<Wod> GetWorkoutByIdAsync(int id)
         {
-            return await _dbContext.Workouts
-                .Include(w => w.Program)
-                .Include(w => w.WorkoutCircuitParents)
-                .Include(w => w.WorkoutRegulars)
-                .FirstOrDefaultAsync(w => w.WorkoutId == id);
+            return await _dbContext.Wods
+                .FirstOrDefaultAsync(w => w.WodId == id);
         }
 
-        public async Task<int> AddWorkoutAsync(Workout workout)
+        public async Task<int> AddWorkoutAsync(Wod Wod)
         {
-            _dbContext.Add(workout);
+            _dbContext.Add(Wod);
             var res = await _dbContext.SaveChangesAsync();
 
-            return workout.WorkoutId;
+            return Wod.WodId;
             //return affectedRows > 0;
         }
 
-        public async Task<bool> UpdateWorkoutAsync(Workout workout)
+        public async Task<bool> UpdateWorkoutAsync(Wod Wod)
         {
-            _dbContext.Update(workout);
+            _dbContext.Update(Wod);
             int affectedRows = await _dbContext.SaveChangesAsync();
             return affectedRows > 0;
         }
 
         public async Task<bool> DeleteWorkoutAsync(int id)
         {
-            var workout = await _dbContext.Workouts.FindAsync(id);
-            if (workout != null)
+            var Wod = await _dbContext.Wods.FindAsync(id);
+            if (Wod != null)
             {
-                _dbContext.Set<Workout>().Remove(workout);
+                _dbContext.Set<Wod>().Remove(Wod);
                 int affectedRows = await _dbContext.SaveChangesAsync();
                 return affectedRows > 0;
             }
             return false;
         }
 
-        public async Task<Workout> GetWorkoutByProgramAndDateAsync(int programID, DateTime date)
+        public async Task<Wod> GetWorkoutByProgramAndDateAsync(int programID, DateTime date)
         {
-            var todays = await _dbContext.Workouts
-                                        .Where(x => x.ProgramId == programID && x.WokoutDate == date.Date)
-                                        .Include(w => w.Program)
-                                        .Include(w => w.WorkoutCircuitParents)
-                                        .Include(w => w.WorkoutRegulars).FirstOrDefaultAsync();
+            var todays = await _dbContext.Wods
+                                        .Where(x => x.ProgramId == programID && x.ScheduleDate == date.Date)
+                                        .FirstOrDefaultAsync();
 
             return todays;
                                         
         }
+
+        public async Task<int> AddWorkoutScroreingType(WorkoutScore score)
+        {
+            _dbContext.WorkoutScores.Add(score);
+            var res = await _dbContext.SaveChangesAsync();
+            return score.ScoreId;
+        } 
     }
 }

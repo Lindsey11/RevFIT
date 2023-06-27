@@ -25,7 +25,5 @@ public partial class WorkoutRegular
 
     public DateTime DateCreated { get; set; }
 
-    public virtual ExcerciseProgram? ExcerciseProgram { get; set; }
-
     public virtual ICollection<WorkoutRegularChild> WorkoutRegularChildren { get; set; } = new List<WorkoutRegularChild>();
 }

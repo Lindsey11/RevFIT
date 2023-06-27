@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace RevFIT.DataAccess.WorkoutRepo
 {
-    public interface IWorkoutRepository
+    public interface IWODRepository
     {
-        Task<IEnumerable<Workout>> GetAllWorkoutsAsync();
-        Task<Workout> GetWorkoutByIdAsync(int id);
-        Task<int> AddWorkoutAsync(Workout workout);
-        Task<bool> UpdateWorkoutAsync(Workout workout);
+        Task<IEnumerable<Wod>> GetAllWorkoutsAsync();
+        Task<Wod> GetWorkoutByIdAsync(int id);
+        Task<int> AddWorkoutAsync(Wod Wod);
+        Task<int> AddWorkoutScroreingType(WorkoutScore scoretype);
+        Task<bool> UpdateWorkoutAsync(Wod Wod);
         Task<bool> DeleteWorkoutAsync(int id);
-        Task<Workout> GetWorkoutByProgramAndDateAsync(int programID, DateTime date);
+        Task<Wod> GetWorkoutByProgramAndDateAsync(int programID, DateTime date);
     }
 }

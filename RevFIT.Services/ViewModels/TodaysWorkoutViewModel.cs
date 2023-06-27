@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace RevFIT.Services.ViewModels
 {
-    internal class TodaysWorkoutViewModel
+    public class TodaysWorkoutViewModel
     {
+
     }
 }

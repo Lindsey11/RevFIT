@@ -1,4 +1,4 @@
-﻿using RevFIT.Context.Models;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +9,21 @@ namespace RevFIT.Services.ViewModels
 {
     public class WorkoutAddRequestModel
     {
-        public int WorkoutId { get; set; }
-
-        public string? WarmUp { get; set; }
+        public int WodId { get; set; }
 
         public string WorkoutName { get; set; } = null!;
 
-        public string? Description { get; set; }
-
-        public int WorkoutTypeId { get; set; }
+        public string WorkoutDefinition { get; set; } = null!;
 
         public int ProgramId { get; set; }
+        public int MeasureTypeID { get; set; }
+        public int CalcTypeID { get; set; }
+        public int OrderTypeID { get; set; }    
+        public int set { get; set; }
+        public string ScoreType { get; set; } = null!;
 
-        public string? CoolDown { get; set; }
+        public DateTime ScheduleDate { get; set; }
 
-        public DateTime WokoutDate { get; set; }
+        public bool IsLive { get; set; }
     }
 }
