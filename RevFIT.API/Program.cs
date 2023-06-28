@@ -6,6 +6,7 @@ using RevFIT.Services.WorkoutServices;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using RevFIT.DataAccess.ScoreMeasureTypeRepo;
+using RevFIT.Services.AuthenticationService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +28,7 @@ builder.Services.AddScoped<IWODRepository, WODRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IScoreDataRepository, ScoreDataRepository>();
 builder.Services.AddScoped<IWorkoutService, WorkoutService>();
-
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 JsonSerializerOptions options = new()
 {

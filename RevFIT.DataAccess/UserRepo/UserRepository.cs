@@ -28,11 +28,11 @@ namespace RevFIT.DataAccess.UserRepo
             return await _dataContext.Users.FindAsync(id);
         }
 
-        public async Task<bool> AddUserAsync(User user)
+        public async Task<int> AddUserAsync(User user)
         {
             _dataContext.Users.Add(user);
             int affectedRows = await _dataContext.SaveChangesAsync();
-            return affectedRows > 0;
+            return user.UserId;
         }
 
         public async Task<bool> UpdateUserAsync(User user)
@@ -54,7 +54,11 @@ namespace RevFIT.DataAccess.UserRepo
             return false;
         }
 
-
+        public async Task<User> GetUserByEmail(string email)
+        {
+            var user = await _dataContext.Users.Where(x => x.Email.ToLower() == email).FirstOrDefaultAsync();
+            return user;
+        }
 
     }
 }

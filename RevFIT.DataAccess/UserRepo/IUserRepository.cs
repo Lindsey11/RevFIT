@@ -11,9 +11,10 @@ namespace RevFIT.DataAccess.UserRepo
     {
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User> GetUserByIdAsync(int id);
-        Task<bool> AddUserAsync(User user);
+        Task<int> AddUserAsync(User user);
         Task<bool> UpdateUserAsync(User user);
         Task<bool> DeleteUserAsync(int id);
+        Task<User> GetUserByEmail(string email);
 
     }
 }

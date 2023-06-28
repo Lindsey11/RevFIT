@@ -1,0 +1,431 @@
+﻿{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "RevFIT.API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/workout/todays-workout": {
+      "get": {
+        "tags": [
+          "Workout"
+        ],
+        "operationId": "todays-workout",
+        "parameters": [
+          {
+            "name": "progrogramID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "dateTime",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WodServiceResponseModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WodServiceResponseModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WodServiceResponseModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/workout/add-workout": {
+      "post": {
+        "tags": [
+          "Workout"
+        ],
+        "operationId": "add-workout",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkoutAddRequestModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkoutAddRequestModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkoutAddRequestModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32ServiceResponseModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32ServiceResponseModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32ServiceResponseModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ExcerciseProgram": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "programId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "programName": {
+            "type": "string",
+            "nullable": true
+          },
+          "programTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "programDurationWeeks": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dateCreated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "programType": {
+            "$ref": "#/components/schemas/ProgramType"
+          },
+          "wods": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Wod"
+            }
+          }
+        }
+      },
+      "Int32ServiceResponseModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ProgramType": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "programTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "excercisePrograms": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ExcerciseProgram"
+            }
+          }
+        }
+      },
+      "ScoreCalculationType": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "scoreCalculationTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "workoutScores": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/WorkoutScore"
+            }
+          }
+        }
+      },
+      "ScoreMeasureType": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "measureTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "workoutScores": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/WorkoutScore"
+            }
+          }
+        }
+      },
+      "ScoreOrderType": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "scoreOrderTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "workoutScores": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/WorkoutScore"
+            }
+          }
+        }
+      },
+      "Wod": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "wodId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "workoutName": {
+            "type": "string",
+            "nullable": true
+          },
+          "workoutDefinition": {
+            "type": "string",
+            "nullable": true
+          },
+          "programId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreType": {
+            "type": "string",
+            "nullable": true
+          },
+          "scheduleDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isLive": {
+            "type": "boolean"
+          },
+          "dateCreated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "program": {
+            "$ref": "#/components/schemas/ExcerciseProgram"
+          },
+          "workoutScores": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/WorkoutScore"
+            }
+          }
+        }
+      },
+      "WodServiceResponseModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Wod"
+          },
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "WorkoutAddRequestModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "wodId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "workoutName": {
+            "type": "string",
+            "nullable": true
+          },
+          "workoutDefinition": {
+            "type": "string",
+            "nullable": true
+          },
+          "programId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "measureTypeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "calcTypeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "orderTypeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "set": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreType": {
+            "type": "string",
+            "nullable": true
+          },
+          "scheduleDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isLive": {
+            "type": "boolean"
+          }
+        }
+      },
+      "WorkoutScore": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "scoreId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sets": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "measureTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreCalculationTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreOrderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "workoutId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dateCreated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "measureType": {
+            "$ref": "#/components/schemas/ScoreMeasureType"
+          },
+          "scoreCalculationType": {
+            "$ref": "#/components/schemas/ScoreCalculationType"
+          },
+          "scoreOrder": {
+            "$ref": "#/components/schemas/ScoreOrderType"
+          },
+          "workout": {
+            "$ref": "#/components/schemas/Wod"
+          }
+        }
+      }
+    }
+  }
+}
