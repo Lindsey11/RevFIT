@@ -62,6 +62,7 @@ namespace RevFIT.DataAccess.WorkoutRepo
         {
             var todays = await _dbContext.Wods
                                         .Where(x => x.ProgramId == programID && x.ScheduleDate == date.Date)
+                                        .Include(x => x.WorkoutScores)
                                         .FirstOrDefaultAsync();
 
             return todays;

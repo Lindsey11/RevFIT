@@ -20,7 +20,7 @@ namespace RevFIT.API.Controllers
         [ProducesResponseType(typeof(ServiceResponseModel<Wod>), 200)]
         public async Task<IActionResult> GetTodaysWorkouts(int progrogramID, DateTime dateTime)
         {
-            return Ok(await _workoutService.GetTodaysWorkout(progrogramID, DateTime.Now));
+            return Ok(await _workoutService.GetTodaysWorkout(progrogramID, dateTime));
         }
 
         [HttpPost("add-workout")]

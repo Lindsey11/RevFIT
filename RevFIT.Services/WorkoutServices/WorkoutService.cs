@@ -6,16 +6,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RevFIT.DataAccess.ScoreMeasureTypeRepo;
 
 namespace RevFIT.Services.WorkoutServices
 {
     public class WorkoutService : IWorkoutService
     {
         private readonly IWODRepository _workoutRepository;
-      
-        public WorkoutService(IWODRepository workoutRepository)
+        private readonly IScoreDataRepository _scoreDataRepository;
+        public WorkoutService(IWODRepository workoutRepository, IScoreDataRepository scoreDataRepository)
         {
             _workoutRepository = workoutRepository;
+            _scoreDataRepository = scoreDataRepository;
         }
 
         public async Task<ServiceResponseModel<Wod>> GetTodaysWorkout(int programID, DateTime workoutDate)
@@ -68,7 +70,7 @@ namespace RevFIT.Services.WorkoutServices
 
                 var addScoreResult = await _workoutRepository.AddWorkoutScroreingType(newsScore);
 
-                if(addResult == 0)
+                if(addScoreResult == 0)
                     return new() { IsSuccess = false, Message = $"Score could not be added" };
 
 
@@ -81,9 +83,30 @@ namespace RevFIT.Services.WorkoutServices
             }
         }
 
-        //public async Task<ServiceResponseModel<bool>> AddRegularWorkout()
-        //{
+        public async Task<WodBuilderViewModel> GetWodBuilderPageData()
+        {
+            try
+            {
+                var orders = await _scoreDataRepository.GetScoreOrderTypes();
+                var measures = await _scoreDataRepository.GetScoreMeasureTypes();
+                var calcTypes = await _scoreDataRepository.GetScoreCalculationsTypes();
 
-        //}
+                var wodBuilderModel = new WodBuilderViewModel()
+                {
+                    ScoreCalculationTypes = calcTypes,
+                    ScoreOrderTypes = orders,
+                    ScoreMeasureTypes = measures,
+                    Message = "Retrieved Scoring data",
+                    Success = true
+                };
+
+                return wodBuilderModel;
+
+            }
+            catch (Exception error)
+            {
+                return new() { Success = false, Message = $"Error adding workout. {error.Message}" };
+            }
+        }
     }
 }

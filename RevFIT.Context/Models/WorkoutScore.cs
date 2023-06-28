@@ -17,7 +17,7 @@ public partial class WorkoutScore
 
     public int WorkoutId { get; set; }
 
-    public int DateCreated { get; set; }
+    public DateTime DateCreated { get; set; }
 
     public virtual ScoreMeasureType MeasureType { get; set; } = null!;
 

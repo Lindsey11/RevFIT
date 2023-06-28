@@ -184,7 +184,7 @@ public partial class DataContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.ProgramId).HasColumnName("ProgramID");
-            entity.Property(e => e.ScheduleDate).HasColumnType("date");
+            entity.Property(e => e.ScheduleDate).HasColumnType("datetime");
             entity.Property(e => e.ScoreType)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -244,6 +244,9 @@ public partial class DataContext : DbContext
             entity.ToTable("WorkoutScore", "dbo");
 
             entity.Property(e => e.ScoreId).HasColumnName("ScoreID");
+            entity.Property(e => e.DateCreated)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
             entity.Property(e => e.MeasureTypeId).HasColumnName("MeasureTypeID");
             entity.Property(e => e.ScoreCalculationTypeId).HasColumnName("ScoreCalculationTypeID");
             entity.Property(e => e.ScoreOrderId).HasColumnName("ScoreOrderID");
