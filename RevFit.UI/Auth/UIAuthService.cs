@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
-using RevFit.UI.RevFitAPI;
-using RevFit.UI.ViewModels.Auth;
+using OpenAPIShared.RevFitAPI;
+using RevFit.Client.UI.ViewModels.Auth;
 
-namespace RevFit.UI.Auth
+namespace RevFit.Client.UI.Auth
 {
     public class UIAuthService : IUIAuthService
     {
@@ -18,9 +18,17 @@ namespace RevFit.UI.Auth
             throw new NotImplementedException();
         }
 
-        public Task<string> Login(UserLoginViewModel request)
+        public async Task<string> Login(UIUserLoginViewModel request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _apiClient.AuthLoginAsync(new() { Email = request.Email, Password = request.Password });
+                return result.Data;
+            }
+            catch (Exception error)
+            {
+                return "";
+            }
         }
 
         public Task<bool> Register(UserRegisterViewModel request)

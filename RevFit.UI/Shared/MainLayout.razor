@@ -1,6 +1,12 @@
 ﻿@inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager navmanger
 
-<div class="page">
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+@*<div class="page">
     <div class="sidebar">
         <NavMenu />
     </div>
@@ -14,4 +20,53 @@
             @Body
         </article>
     </main>
-</div>
+</div>*@
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.h5" Class="ml-3"></MudText>
+        <img src="/images/logo.png" height="80" width="80" />
+        <MudSpacer />
+        <MudMenu Label="Open Menu" AnchorOrigin="Origin.BottomCenter" Color="Color.Surface">
+            <MudMenuItem>Enlist</MudMenuItem>
+            <MudMenuItem>Barracks</MudMenuItem>
+            <MudMenuItem>Armory</MudMenuItem>
+        </MudMenu>
+        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">       
+        @*NavMenu*@
+    </MudDrawer>
+    <MudMainContent>
+        <div class="container-fluid">
+            @Body
+        </div>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    bool _drawerOpen = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ValidateUser();
+    }
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    private async Task ValidateUser()
+    {
+        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authenticationState.User;
+
+        if (!user.Identity.IsAuthenticated)
+        {
+            navmanger.NavigateTo("/Login");
+        }
+    }
+
+}

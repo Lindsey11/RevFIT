@@ -1,11 +1,11 @@
-﻿using RevFit.UI.ViewModels.Auth;
+﻿using RevFit.Client.UI.ViewModels.Auth;
 
-namespace RevFit.UI.Auth
+namespace RevFit.Client.UI.Auth
 {
     public interface IUIAuthService
     {
         Task<bool> Register(UserRegisterViewModel request);
-        Task<string> Login(UserLoginViewModel request);
+        Task<string> Login(UIUserLoginViewModel request);
         //Task<ServiceResponse<bool>> ChangePassword(UserChangePassword request);
         Task<bool> IsUserAuthenticated();
     }

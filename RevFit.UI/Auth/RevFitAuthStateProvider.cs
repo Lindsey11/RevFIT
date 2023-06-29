@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Text.Json;
 
-namespace RevFit.UI.Auth
+namespace RevFit.Client.UI.Auth
 {
     public class RevFitAuthStateProvider : AuthenticationStateProvider
     {

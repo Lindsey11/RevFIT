@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RevFit.UI.ViewModels.Auth
+namespace RevFit.Client.UI.ViewModels.Auth
 {
     public class UserRegisterViewModel
     {

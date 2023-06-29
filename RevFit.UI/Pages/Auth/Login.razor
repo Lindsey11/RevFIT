@@ -1,0 +1,37 @@
+﻿@page "/Login"
+@layout AuthLayout
+
+<div class=" container-fluid d-flex align-items-center justify-content-center">
+    <div class="row">
+
+
+        <div class="col-12">
+            <MudCard Style="width:100%;">
+              @*  <MudCardMedia Image="images/logo.png" Height="400" Style="background-color: #594ae2" />*@
+                <div style="background-color: #594ae2">
+                    <img src="images/logo.png" height="400" style="filter: brightness(0) invert(1);" />
+                </div>
+                <MudCardHeader Style="text-align: center;">
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.body1">BearFit HQ</MudText>
+                        <MudText Typo="Typo.body2">Secure Client Login</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+
+                <MudCardContent>
+                    <MudTextField Variant="Variant.Outlined" Label="Username" @bind-Value="user.Email" />
+                    <MudTextField Variant="Variant.Outlined" Label="Password" @bind-Value="user.Password" InputType="InputType.Password" />
+
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="HandleLogin" Style="margin:auto;">Login</MudButton>
+                </MudCardActions>
+            </MudCard>
+
+        </div>
+    </div>
+</div>
+
+@code {
+
+}
