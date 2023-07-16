@@ -1,6 +1,6 @@
 ﻿{
   "ProviderId": "Unchase.OpenAPI.ConnectedService",
-  "Version": "1.8.0.0",
+  "Version": "1.9.1.0",
   "GettingStartedDocument": {
     "Uri": "https://github.com/unchase/Unchase.OpenAPI.Connectedservice/"
   },
@@ -8,7 +8,7 @@
     "ServiceName": "RevFitAPI",
     "AcceptAllUntrustedCertificates": true,
     "GeneratedFileName": "RevFitAPI",
-    "Endpoint": "C:\\Users\\lindsey\\OneDrive - fml.co.za\\Desktop\\RND\\RevFIT\\OpenAPI.json",
+    "Endpoint": "C:\\Users\\drewl\\source\\repos\\Lindsey11\\RevFIT\\OpenAPI.json",
     "GeneratedFileNamePrefix": null,
     "GenerateCSharpClient": true,
     "GenerateTypeScriptClient": false,
@@ -106,7 +106,7 @@
     "Runtime": 0,
     "CopySpecification": false,
     "OpenGeneratedFilesOnComplete": false,
-    "UseRelativePath": false,
+    "UseRelativePath": true,
     "ConvertFromOdata": false,
     "OpenApiConvertSettings": {
       "ServiceRoot": "http://localhost",

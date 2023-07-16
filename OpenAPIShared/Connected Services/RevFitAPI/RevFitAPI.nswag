@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "C:\\Users\\lindsey\\OneDrive - fml.co.za\\Desktop\\RND\\RevFIT\\OpenAPI.json",
+      "url": "C:\\Users\\drewl\\source\\repos\\Lindsey11\\RevFIT\\OpenAPI.json",
       "output": "RevFitAPI.nswag.json",
       "newLineBehavior": "Auto"
     }

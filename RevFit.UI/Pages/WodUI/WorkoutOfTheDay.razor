@@ -1,0 +1,28 @@
+﻿@page "/WorkoutOfTheDay"
+
+<div class="container-fluid align-items-center justify-content-center">
+    <div class="row">
+
+        <div class="col-sm-12" style="height:25px;">
+            <h5>@DateTime.Now.ToShortDateString()</h5>
+        </div>
+
+        <div class="col-sm-12">
+            <MudSelect Margin="Margin.Dense" T="string" Label="Workout of the day" Variant="Variant.Outlined">
+                <MudSelectItem Value="@("Workout of the day")" />
+            </MudSelect>
+        </div>
+
+        <div class="col-sm-12">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField T="string" Text="@("does this work")" />
+                </MudCardContent>
+            </MudCard>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

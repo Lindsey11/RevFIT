@@ -1,0 +1,19 @@
+﻿@using MudBlazor
+
+<MudDialog @ref="loadingDialog" DisableEscapeKey="true" DisableBackdropClick="true" HideTitle="true" MaxWidth="280px" ContentClass="text-center">
+    <MudProgressCircular Indeterminate="true" Size="Size.Large" />
+</MudDialog>
+
+@code {
+    private MudDialog loadingDialog;
+
+    public void ShowLoading()
+    {
+        loadingDialog.Show();
+    }
+
+    public void HideLoading()
+    {
+        loadingDialog.Close();
+    }
+}

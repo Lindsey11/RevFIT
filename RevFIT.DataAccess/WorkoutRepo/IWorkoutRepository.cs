@@ -15,6 +15,6 @@ namespace RevFIT.DataAccess.WorkoutRepo
         Task<int> AddWorkoutScroreingType(WorkoutScore scoretype);
         Task<bool> UpdateWorkoutAsync(Wod Wod);
         Task<bool> DeleteWorkoutAsync(int id);
-        Task<Wod> GetWorkoutByProgramAndDateAsync(int programID, DateTime date);
+        Task<List<Wod>> GetWorkoutByProgramAndDateAsync(int programID, DateTime date);
     }
 }

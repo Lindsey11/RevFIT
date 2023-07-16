@@ -20,7 +20,7 @@ namespace RevFIT.Services.WorkoutServices
             _scoreDataRepository = scoreDataRepository;
         }
 
-        public async Task<ServiceResponseModel<Wod>> GetTodaysWorkout(int programID, DateTime workoutDate)
+        public async Task<ServiceResponseModel<List<Wod>>> GetTodaysWorkout(int programID, DateTime workoutDate)
         {
             try
             {

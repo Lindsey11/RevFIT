@@ -10,7 +10,7 @@ namespace RevFIT.Services.WorkoutServices
 {
     public interface IWorkoutService
     {
-        Task<ServiceResponseModel<Wod>> GetTodaysWorkout(int programID, DateTime workoutDate);
+        Task<ServiceResponseModel<List<Wod>>> GetTodaysWorkout(int programID, DateTime workoutDate);
         Task<ServiceResponseModel<int>> AddMainWorkout(WorkoutAddRequestModel model);
     }
 }

@@ -5,6 +5,7 @@ using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using RevFit.Client.UI.Auth;
 using System;
+using RevFit.Client.UI.Shared;
 
 namespace RevFit.Client.UI.Pages.Auth
 {
@@ -21,6 +22,7 @@ namespace RevFit.Client.UI.Pages.Auth
         AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         [Inject]
         IUIAuthService AuthService { get; set; }
+        private LoadingComponent loadingComponent;
         protected override void OnInitialized()
         {
             var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
@@ -35,6 +37,8 @@ namespace RevFit.Client.UI.Pages.Auth
         {
             try
             {
+                // Show loading
+                loadingComponent.ShowLoading();
                 var result = await AuthService.Login(user);
                 if (!string.IsNullOrEmpty(result))
                 {
@@ -49,10 +53,14 @@ namespace RevFit.Client.UI.Pages.Auth
                 {
                     errorMessage = "Error logging in";
                 }
+                // Hide loading
+                loadingComponent.HideLoading();
             }
             catch (Exception error)
             {
                 errorMessage = error.Message;
+                // Hide loading
+                loadingComponent.HideLoading();
             }
 
         }

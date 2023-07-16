@@ -58,12 +58,12 @@ namespace RevFIT.DataAccess.WorkoutRepo
             return false;
         }
 
-        public async Task<Wod> GetWorkoutByProgramAndDateAsync(int programID, DateTime date)
+        public async Task<List<Wod>> GetWorkoutByProgramAndDateAsync(int programID, DateTime date)
         {
             var todays = await _dbContext.Wods
                                         .Where(x => x.ProgramId == programID && x.ScheduleDate == date.Date)
                                         .Include(x => x.WorkoutScores)
-                                        .FirstOrDefaultAsync();
+                                        .ToListAsync();
 
             return todays;
                                         

@@ -6,7 +6,7 @@ using MudBlazor.Services;
 using OpenAPIShared.RevFitAPI;
 using RevFit.Client.UI;
 using RevFit.Client.UI.Auth;
-
+using RevFit.Client.UI.UIServices.Workout;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 WebAssemblyHostConfiguration cfg = builder.Configuration;
@@ -20,6 +20,7 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddMudServices();
 builder.Services.AddScoped<AuthenticationStateProvider, RevFitAuthStateProvider>();
 builder.Services.AddScoped<IUIAuthService, UIAuthService>();
+builder.Services.AddTransient<IUIWodService, UIWodService>();
 
 HttpClient RevAPI = new();
 builder.Services.AddTransient(s => new RevFITAPIClient(cfg["RevFitAPI:Host"], RevAPI));
